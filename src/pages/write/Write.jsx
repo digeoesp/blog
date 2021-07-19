@@ -3,6 +3,7 @@ import "./write.css"
 export default function Write() {
     return (
         <div className="write">
+
             <form className="writeForm">
                 <div className="writeFormGroup">
                     <label htmlFor="fileInput">
@@ -16,6 +17,11 @@ export default function Write() {
                 </div>
                 <button className="writeSubmit">Publish </button>
             </form>
+            <img
+                className="writeImg"
+                src="https://snowbrains.com/wp-content/uploads/2015/12/0013.jpg"
+                alt=""
+            />
         </div>
     )
 }
