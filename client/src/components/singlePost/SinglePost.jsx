@@ -1,70 +1,44 @@
+import { useLocation } from "react-router-dom"
+import { useEffect, useState } from "react"
+import axios from "axios"
 import "./singlePost.css"
 
 export default function SinglePost() {
+    const location = useLocation()
+    const path = location.pathname.split("/")[2];
+    const [post, setPost] = useState({});
+
+    useEffect(() => {
+        const getPost = async () => {
+            const res = await axios.get("/posts/" + path);
+            setPost(res.data)
+        };
+        getPost()
+    }, [path])
+
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
-                <img
-                    src="https://snowbrains.com/wp-content/uploads/2015/12/0013.jpg"
-                    alt="post"
-                    className="singlePostImg" />
+                {post.photo && (
+                    <img
+                        src={post.photo}
+                        alt="post"
+                        className="singlePostImg" />
+
+                )}
                 <h1 className="singlePostTitle">
-                    Lorem ipsum dolor sit amet.
+                    {post.title}
                     <div className="singlePostEdit">
                         <i className="singlePostIcon far fa-edit"></i>
                         <i className="singlePostIcon far fa-trash-alt"></i>
                     </div>
                 </h1>
                 <div className="singlePostInfo">
-                    <span className="singlePostAuthor">Author: <b>Diego Espinoza</b></span>
-                    <span className="singlePostDate">1 hour ago</span>
+                    <span className="singlePostAuthor">Author: <b>{post.username}</b></span>
+                    <span className="singlePostDate">{new Date(post.createdAt).toDateString()}</span>
                 </div>
                 <p className="singlePostDesc">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Tenetur molestiae vero vitae expedita itaque ducimus alias atque rerum
-                    labore quia at ab consequatur dicta earum nobis, delectus aut explicabo architecto.
+                    {post.desc}
                 </p>
             </div>
         </div>
