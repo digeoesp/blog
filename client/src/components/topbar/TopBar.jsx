@@ -27,7 +27,7 @@ export default function TopBar() {
                 </ul>
             </div>
             <div className='topRight'>
-                {user ? (<img className="topImg" src="https://res.cloudinary.com/dstqqskiw/image/upload/v1626654667/1618561267723_dev87e.png" alt="avitar" />)
+                {user ? (<img className="topImg" src={user.profilePic} alt="avitar" />)
                     : (
                         <ul className="topList">
                             <li className="topListItem">
